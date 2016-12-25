@@ -1,11 +1,14 @@
+// @flow
+
 const uuid = require('uuid/v4')
 
-function createGame () {
+function createRace () {
   return {
     players: [],
     uuid: uuid(),
     secondsUntilGameStarts: 10,
-    addPlayer (name) {
+    started: false,
+    addPlayer (name: string) {
       const player = {
         name,
         uuid: uuid()
@@ -29,10 +32,6 @@ function createGame () {
   }
 }
 
-const game = createGame()
-const player1 = game.addPlayer({
-  displayName: 'Alex Booker'
-})
-
-// type a word and post it each time it's sent
-// word
+module.exports = {
+  createRace
+}

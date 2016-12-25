@@ -8,9 +8,23 @@
     "uuid": "^3.0.1"
   },
   "devDependencies": {
-    "ava": "^0.17.0"
+    "ava": "^0.17.0",
+    "babel-plugin-transform-flow-strip-types": "^6.21.0",
+    "babel-register": "^6.18.0",
+    "flow-bin": "^0.37.4"
   },
   "scripts": {
-    "test": "ava ./tests"
+    "test": "ava ./tests",
+    "flow": "flow; test $? -eq 0 -o $? -eq 2"
+  },
+  "babel": {
+    "plugins": [
+      "transform-flow-strip-types"
+    ]
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ]
   }
 }
