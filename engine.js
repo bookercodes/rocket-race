@@ -15,6 +15,7 @@ function createRace () {
       }
       this.players.push(player)
       if (this.players.length >= 2) {
+        this.started = true
         const timer = setInterval(() => {
           console.log(this.secondsUntilGameStarts)
           this.secondsUntilGameStarts -= 1
