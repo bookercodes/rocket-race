@@ -2,20 +2,40 @@
 
 const uuid = require('uuid/v4')
 
-function createRace () {
+const gameStates = {
+  STOPPED: 'STOPPED',
+  STARTING: 'STARTING'
+}
+type GameState = $Keys<typeof gameStates>
+type Player = {
+  name: string,
+  uuid: string
+}
+type Game = {
+  players: Array<Player>,
+  uuid: string,
+  secondsUntilGameStarts: number,
+  getState: () => GameState,
+  addPlayer: string => string
+}
+
+function createRace (): Game {
+  let gameState: GameState = gameStates.STOPPED
   return {
     players: [],
     uuid: uuid(),
     secondsUntilGameStarts: 10,
-    started: false,
-    addPlayer (name: string) {
+    getState: function (): GameState {
+      return gameState
+    },
+    addPlayer: function (name: string): string {
       const player = {
         name,
         uuid: uuid()
       }
       this.players.push(player)
       if (this.players.length >= 2) {
-        this.started = true
+        gameState = gameStates.STARTING
         const timer = setInterval(() => {
           console.log(this.secondsUntilGameStarts)
           this.secondsUntilGameStarts -= 1

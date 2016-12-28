@@ -15,7 +15,7 @@ test('addPlayer', t => {
 test('race doesn\'t start until there are at least two players', t => {
   const sut = engine.createRace()
   sut.addPlayer('foo')
-  t.false(sut.started)
+  t.truthy(sut.getState() === 'STOPPED')
   sut.addPlayer('bar')
-  t.true(sut.started)
+  t.truthy(sut.getState() === 'STARTING')
 })
